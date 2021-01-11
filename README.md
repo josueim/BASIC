@@ -21,9 +21,9 @@ Hecho con amor en UPIICSA 💚
 </div>
 
 ## CONTENIDO 
-1.  -[Justificación](### Justifucación)
-2. -[¿Un lenguaje más?](### ¿Un lenguaje más?)
-3. -[Palabras clave](### Palabras Clave)
+1.  -[Justificación](###Justifucación)
+2. -[¿Un lenguaje más?](###¿Un lenguaje más?)
+3. -[Palabras clave](###Palabras Clave)
 	- [Lenguaje de máquina](**Lenguaje de máquina.**)
 	- [Lenguaje ensamblador](**Lenguaje ensamblador.**)
 	- [Compilador](**Compilador**)
