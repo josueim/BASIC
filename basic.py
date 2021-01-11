@@ -29,9 +29,9 @@ class Error:
 
 class IllegalCharError(Error):
     def __init__(self, pos_start, pos_end, details):
-        super().__init__(pos_start, pos_end, 'carácter Ilegal', details)
+        super().__init__(pos_start, pos_end, 'Carácter Ilegal', details)
 
-class InvalidSyntaxtError(Error):
+class InvalidSyntaxError(Error):
     def __init__(self, pos_start, pos_end, details = ''):
         super().__init__(pos_start, pos_end, 'Error de Sintaxis', details)
 #######################################
@@ -192,6 +192,14 @@ class BinOpNode:
      def __repr__(self):
         return f'({self.left_node}, {self.op_tok}, {self.right_node})'
 
+class UnaryOpNode:
+	def __init__(self, op_tok, node):
+		self.op_tok = op_tok
+		self.node = node
+
+	def __repr__(self):
+		return f'({self.op_tok}, {self.node})'
+
 #######################################
 #           RESULT PARSER             #
 #######################################
@@ -239,8 +247,8 @@ class Parser:
     def parse(self):
         res = self.expr()
         if not res.error and self.current_tok.type != TT_EOF:
-            return res.failure(InvalidSyntaxtError(
-                self.current_tok.pos_star, self.current_tok.pos_end,
+            return res.failure(InvalidSyntaxError(
+                self.current_tok.pos_start, self.current_tok.pos_end,
                 "Esperando '+', '-', '*' or  '/'"
             ))
         return res
@@ -249,13 +257,34 @@ class Parser:
     def factor(self):
         res = ParseResult()
         tok = self.current_tok
+        
+        if tok.type in (TT_PLUS, TT_MINUS):
+            res.register(self.advance())
+            factor = res.register(self.factor())
+            if res.error: return res
+            return res.success(UnaryOpNode(tok, factor))
 
-        if tok.type in (TT_INT, TT_FLOAT):
+        elif tok.type in (TT_INT, TT_FLOAT):
             res.register(self.advance())
             return res.success(NumberNode(tok))
-        return res.failure(InvalidSyntaxtError(
-            tok.pos_star, tok.pos_end, "Esperando INT or FLOAT"
-        ))
+        
+        elif tok.type == TT_LPAREN:
+            res.register(self.advance())
+            expr = res.register(self.expr())
+            if res.error: return res
+            if self.current_tok.type == TT_RPAREN:
+                res.register(self.advance())
+                return res.success(expr)
+                
+            else:
+                return res.failure(InvalidSyntaxError(
+					self.current_tok.pos_start, self.current_tok.pos_end,
+					"Expected ')'"
+				))
+        return res.failure(InvalidSyntaxError(
+			tok.pos_start, tok.pos_end,
+			"Esperando un INT o un FLOAT"
+		))
 
     def term(self): 
         return self.bin_op(self.factor, (TT_MUL, TT_DIV))
