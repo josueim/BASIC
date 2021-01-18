@@ -2,7 +2,8 @@
 #              IMPORTS                #
 #######################################
 
-from string_with_arrows import * 
+from string_with_arrows import *
+
 import string
 
 #######################################
@@ -32,7 +33,7 @@ class Error:
 
 class IllegalCharError(Error):
 	def __init__(self, pos_start, pos_end, details):
-		super().__init__(pos_start, pos_end, 'Caracter Ilegal', details)
+		super().__init__(pos_start, pos_end, 'Carácter Ilegal', details)
 
 class InvalidSyntaxError(Error):
 	def __init__(self, pos_start, pos_end, details=''):
@@ -40,7 +41,7 @@ class InvalidSyntaxError(Error):
 
 class RTError(Error):
 	def __init__(self, pos_start, pos_end, details, context):
-		super().__init__(pos_start, pos_end, 'Error en el Tiempo de Ejecución', details)
+		super().__init__(pos_start, pos_end, 'Error en el Timpo de Ejecución', details)
 		self.context = context
 
 	def as_string(self):
@@ -55,7 +56,7 @@ class RTError(Error):
 		ctx = self.context
 
 		while ctx:
-			result = f'  Archivo {pos.fn}, linea {str(pos.ln + 1)}, in {ctx.display_name}\n' + result
+			result = f'  Archivo {pos.fn}, linea {str(pos.ln + 1)}, en {ctx.display_name}\n' + result
 			pos = ctx.parent_entry_pos
 			ctx = ctx.parent
 
@@ -146,7 +147,7 @@ class Lexer:
 
 #avanzará al siguiente carácter aéreo en el texto entonces incrementaremos la posición y pondremos
 # el caracter actual al caracter en esa posición, podremos hacer eso, solo si la posición es menor
-# que el largo del texto	
+# que el largo del texto
 	def advance(self):
 		self.pos.advance(self.current_char)
 		self.current_char = self.text[self.pos.idx] if self.pos.idx < len(self.text) else None
@@ -328,7 +329,7 @@ class Parser:
 		if not res.error and self.current_tok.type != TT_EOF:
 			return res.failure(InvalidSyntaxError(
 				self.current_tok.pos_start, self.current_tok.pos_end,
-				"'+', '-', '*' o '/', Esperado"
+				"'+', '-', '*', '/' o '^' Esperado"
 			))
 		return res
 
@@ -365,7 +366,7 @@ class Parser:
 
 		return res.failure(InvalidSyntaxError(
 			tok.pos_start, tok.pos_end,
-			"'+', '-', '*' o '/' Esperado"
+			"'+', '-' o '(' Esperando INT, FLOAT O IDENTIFICADOR"
 		))
 
 	def power(self):
@@ -397,7 +398,7 @@ class Parser:
 			if self.current_tok.type != TT_IDENTIFIER:
 				return res.failure(InvalidSyntaxError(
 					self.current_tok.pos_start, self.current_tok.pos_end,
-					" Identificador esperado "
+					"IDENTIFICADOR ESPERADO"
 				))
 
 			var_name = self.current_tok
@@ -407,7 +408,7 @@ class Parser:
 			if self.current_tok.type != TT_EQ:
 				return res.failure(InvalidSyntaxError(
 					self.current_tok.pos_start, self.current_tok.pos_end,
-					" '=' Esperado "
+					"'=' Esperado"
 				))
 
 			res.register_advancement()
@@ -421,7 +422,7 @@ class Parser:
 		if res.error:
 			return res.failure(InvalidSyntaxError(
 				self.current_tok.pos_start, self.current_tok.pos_end,
-				"Expected 'VAR', int, float, identifier, '+', '-' or '('"
+				"'VAR', INT, FLOAT, IDENTIFICADOR, '+', '-' or '(' Esperado"
 			))
 
 		return res.success(node)
@@ -450,6 +451,7 @@ class Parser:
 #           RUNTIME RESULT            #
 #######################################
 
+#La clase numeros, almacena números y opera con en ellos con otros números
 class RTResult:
 	def __init__(self):
 		self.value = None
@@ -504,7 +506,7 @@ class Number:
 			if other.value == 0:
 				return None, RTError(
 					other.pos_start, other.pos_end,
-					'Division entre cero',
+					'División entre cero',
 					self.context
 				)
 
@@ -564,12 +566,12 @@ class SymbolTable:
 #tendremos un metodo diferente para cada nodo, que son: visit_NumberNode, visit_BinOpNode, visit_UnaryOpNode
 class Interpreter:
 	def visit(self, node, context):
-		method_name = f'visitado_{type(node).__name__}'
+		method_name = f'visit_{type(node).__name__}'
 		method = getattr(self, method_name, self.no_visit_method)
 		return method(node, context)
 
 	def no_visit_method(self, node, context):
-		raise Exception(f'No visitado_{type(node).__name__} metodo definido')
+		raise Exception(f'No visit_{type(node).__name__} METODO DEFINIDO')
 
 	###################################
 
@@ -586,7 +588,7 @@ class Interpreter:
 		if not value:
 			return res.failure(RTError(
 				node.pos_start, node.pos_end,
-				f"'{var_name}' no está definida",
+				f"'{var_name}' NO ESTA DEFINIDA",
 				context
 			))
 
@@ -641,11 +643,11 @@ class Interpreter:
 			return res.success(number.set_pos(node.pos_start, node.pos_end))
 
 #######################################
-#                RUN                  #
+# RUN
 #######################################
 
 global_symbol_table = SymbolTable()
-global_symbol_table.set("nula", Number(0))
+global_symbol_table.set("NULO", Number(0))
 
 def run(fn, text):
 	# Generate tokens
@@ -660,7 +662,7 @@ def run(fn, text):
 
 	# Run program
 	interpreter = Interpreter()
-	context = Context('<programa>')
+	context = Context('<program>')
 	context.symbol_table = global_symbol_table
 	result = interpreter.visit(ast.node, context)
 
