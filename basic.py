@@ -125,11 +125,11 @@ KEYWORDS = [
 	'SI', #if
 	'LUEGO', #then
 	'SINO', #elif
-	'ENTONCES' #else
+	'ENTONCES', #else
 	'PARA', #for
 	'HASTA', #To - for
 	'PASO', #step
-	'MIENTRAS', #while
+	'MIENTRAS' #while
 
 ]
 
