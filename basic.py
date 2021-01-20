@@ -127,7 +127,7 @@ KEYWORDS = [
 	'SINO', #elif
 	'ENTONCES' #else
 	'PARA', #for
-	'A', #To - for
+	'HASTA', #To - for
 	'PASO', #step
 	'MIENTRAS', #while
 
@@ -433,7 +433,7 @@ class Parser:
 		if not res.error and self.current_tok.type != TT_EOF:
 			return res.failure(InvalidSyntaxError(
 				self.current_tok.pos_start, self.current_tok.pos_end,
-				"'+', '-', '*', '/' o '^' Esperado"
+				"ESPERANDO '+', '-', '*', '/', '^', '==', '!=', '<', '>', <=', '>=', 'Y' U 'O'"
 			))
 		return res
 
@@ -447,7 +447,7 @@ class Parser:
 		if not self.current_tok.matches(TT_KEYWORD, 'SI'):
 			return res.failure(InvalidSyntaxError(
 				self.current_tok.pos_start, self.current_tok.pos_end,
-				f"Expected 'SI'"
+				f"ESPERANDO 'SI'"
 			))
 
 		res.register_advancement()
@@ -459,7 +459,7 @@ class Parser:
 		if not self.current_tok.matches(TT_KEYWORD, 'LUEGO'):
 			return res.failure(InvalidSyntaxError(
 				self.current_tok.pos_start, self.current_tok.pos_end,
-				f"Expected 'LUEGO'"
+				f"ESPERANDO LUEGO"
 			))
 
 		res.register_advancement()
@@ -479,7 +479,7 @@ class Parser:
 			if not self.current_tok.matches(TT_KEYWORD, 'LUEGO'):
 				return res.failure(InvalidSyntaxError(
 					self.current_tok.pos_start, self.current_tok.pos_end,
-					f"Expected 'LUEGO'"
+					f"ESPERANDO 'LUEGO'"
 				))
 
 			res.register_advancement()
@@ -489,7 +489,7 @@ class Parser:
 			if res.error: return res
 			cases.append((condition, expr))
 
-		if self.current_tok.matches(TT_KEYWORD, 'ENTONCES'):
+		if self.current_tok.matches(TT_KEYWORD, 'SINO'):
 			res.register_advancement()
 			self.advance()
 
@@ -497,7 +497,7 @@ class Parser:
 			if res.error: return res
 
 		return res.success(IfNode(cases, else_case))
-	
+
 	def for_expr(self):
 		res = ParseResult()
 
@@ -532,7 +532,7 @@ class Parser:
 		start_value = res.register(self.expr())
 		if res.error: return res
 
-		if not self.current_tok.matches(TT_KEYWORD, 'A'):
+		if not self.current_tok.matches(TT_KEYWORD, 'HASTA'):
 			return res.failure(InvalidSyntaxError(
 				self.current_tok.pos_start, self.current_tok.pos_end,
 				f"Expected 'TO'"
@@ -810,7 +810,7 @@ class Number:
 			if other.value == 0:
 				return None, RTError(
 					other.pos_start, other.pos_end,
-					'División entre cero',
+					'DIVISION ENTRE CERO',
 					self.context
 				)
 
