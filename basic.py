@@ -561,7 +561,7 @@ class Parser:
 			if res.error:
 				return res.failure(InvalidSyntaxError(
 					self.current_tok.pos_start, self.current_tok.pos_end,
-					"Expected ']', 'VAR', 'IF', 'FOR', 'WHILE', 'FUN', int, float, identifier, '+', '-', '(', '[' or 'NOT'"
+					"Esperando ']', 'VAR', 'SI', 'PARA', 'HASTA', 'FUN', 'entero', 'flotante', 'identificador'"
 				))
 			
 			while self.current_tok.type == TT_COMMA:
@@ -570,7 +570,7 @@ class Parser:
 
 				element_nodes.append(res.register(self.expr()))
 				if res.error: return res
-
+			
 			if self.current_tok.type != TT_RSQUARE:
 				return res.failure(InvalidSyntaxError(
 					self.current_tok.pos_start, self.current_tok.pos_end,
@@ -1290,21 +1290,29 @@ class List(Value):
 					'El elemento en este índice no se pudo eliminar de la lista porque el índice está fuera de los límites',
 					self.context
 				)
-			else:
-				return None, Value.illegal_operation(self, other)
-	
+		else:
+			return None, Value.illegal_operation(self, other)
+		
 	def multed_by(self, other):
+		if isinstance(other, List):
+			new_list = self.copy()
+			new_list.elements.extend(other.elements)
+			return new_list, None
+		else:
+			return None, Value.illegal_operation(self, other)
+	
+	def dived_by(self, other):
 		if isinstance(other, Number):
 			try:
 				return self.elements[other.value], None
 			except:
 				return None, RTError(
 					other.pos_start, other.pos_end,
-					'El elemento en este índice no se pudo recuperar de la lista porque el índice está fuera de los límites',
-				self.context
+					"El elemento en este índice no se pudo recuperar de la lista porque el índice está fuera de los límites",
+					self.context
 				)
-			else:
-				return None, Value.illegal_operation(self, other)
+		else:
+			return None, Value.illegal_operation(self, other)
 
 	def copy(self):
 		copy = List(self.elements[:])
@@ -1313,7 +1321,7 @@ class List(Value):
 		return copy
 
 	def __repr__(self):
-		 return f'[{", ".join([str(x) for x in self.elements])}]'
+		return f'[{", ".join([str(x) for x in self.elements])}]'
 
 class Function(Value):
 	def __init__(self, name, body_node, arg_names):
