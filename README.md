@@ -67,9 +67,10 @@ UBISC contiene diversos archivos, entre ellos:
 
 **Para mayor contenido intelectual sobre el lenguaje, toma el curso en UDEMY *“UBASIC un lenguaje diferente”***
 
+## ¿Quiénes somos?
 </div>
 <div align="center"> 
-  <img src="icons/3.png" whit="50%">
+  <img src="icons/3.png" wiht="50%">
 </div>
 
 <div align="justify"> 
