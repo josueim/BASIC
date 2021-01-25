@@ -3,7 +3,7 @@
 </div>
 
 # ¿Qué es UBASIC?
-<div text-align: justify>
+<div div align="justify">
 Es un lenguaje de programación creado en Python, inspirado en lenguaje BASIC y C, desarrollado por alumnos de UPIICSA para todo aquel que quiera aprender y reforzar sus conocimientos en le amplio mundo de la programación.
 
 UBASIC esta inspirado para todas aquellas que quieran involucrase en el mundo de la programación y que no tengan los fundamentos del idioma inglés.
@@ -17,7 +17,7 @@ Además, UBASIC busca fortalecer las áreas de educación y emprendimiento en ni
 
 ## ¿Un lenguaje de programación más?
 
-<div text-align: justify>
+<div div align="justify">
 <p>
 La respuesta es NO, UBASIC busca estar al nivel lenguajes de programación populares como JAVA, C++, entre otros. 
 
@@ -26,7 +26,7 @@ UBASIC es diferente a los demás lenguajes, lleva su esencia el alma mater de M�
 </div>
 
 ### ¿Qué ofrece UBASIC?
-<div text-align: justify>
+<div div align="justify">
 <p>
 Permite al usuario el confort de generar código limpio, sencillo y de fácil comprensión y redacción.
 
