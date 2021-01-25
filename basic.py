@@ -147,7 +147,7 @@ KEYWORDS = [
   'Y', #Y (AND)
   'O', #(OR)
   'NO', #(NOT)
-  'SI' #condicional if
+  'SI', #condicional if
   'LUEGO', #then para el ciclo if
   'SINO', #elseif
   'ENTONCES', #else
@@ -703,7 +703,7 @@ class Parser:
         if self.current_tok.type != TT_RPAREN:
           return res.failure(InvalidSyntaxError(
             self.current_tok.pos_start, self.current_tok.pos_end,
-            f"Expected ',' or ')'"
+            f"ESPERANDO ',' o ')'"
           ))
 
         res.register_advancement()
@@ -1187,7 +1187,7 @@ class Value:
   def ored_by(self, other):
     return None, self.illegal_operation(other)
 
-  def notted(self):
+  def notted(self, other):
     return None, self.illegal_operation(other)
 
 #funcion ejecutar
@@ -1743,7 +1743,7 @@ class Interpreter:
     return method(node, context)
 
   def no_visit_method(self, node, context):
-    raise Exception(f'NO FUE VISITADO_{type(node).__name__} METODO DEFINO')
+    raise Exception(f'NO FUE VISITADO_{type(node).__name__} METODO DEFINIDO')
 
   ###################################
 
