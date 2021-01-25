@@ -70,7 +70,7 @@ UBISC contiene diversos archivos, entre ellos:
 ## ¿Quiénes somos?
 </div>
 <div align="center"> 
-  <img src="icons/3.png" wiht="50%">
+  <img src="icons/3.png" with="50%">
 </div>
 
 <div align="justify"> 
