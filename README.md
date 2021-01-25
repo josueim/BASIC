@@ -69,6 +69,14 @@ A continuación, se enlistan algunas de las palabras reservadas que incluye en s
 - ES_NUM - declaración para un numero entero
 - ES_CAR – declaración para una cadena de caracteres
 
+##### Ejemplo
+</div>
+<div align="center"> 
+  <img src="icons/4.png">
+</div>
+
+
+
 **Para mayor contenido intelectual sobre el lenguaje, toma el curso en UDEMY *“UBASIC un lenguaje diferente”***
 
 ## ¿Quiénes somos?
