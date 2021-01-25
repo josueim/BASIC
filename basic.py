@@ -1684,18 +1684,18 @@ class BuiltInFunction(BaseFunction):
 
 #metodos constructores para utilziar en el lenguaje
 
-BuiltInFunction.print       = BuiltInFunction("IMPRIMIR")
-BuiltInFunction.print_ret   = BuiltInFunction("IMPRIMIR_RET")
-BuiltInFunction.input       = BuiltInFunction("INGRESAR")
-BuiltInFunction.input_int   = BuiltInFunction("INGRESAR_INT")
-BuiltInFunction.clear       = BuiltInFunction("LIMPIAR")
-BuiltInFunction.is_number   = BuiltInFunction("ES_NUM")
-BuiltInFunction.is_string   = BuiltInFunction("ES_CAR")
-BuiltInFunction.is_list     = BuiltInFunction("ES_LISTA")
-BuiltInFunction.is_function = BuiltInFunction("ES_FUN")
-BuiltInFunction.append      = BuiltInFunction("AGREGAR")
-BuiltInFunction.pop         = BuiltInFunction("QUITAR")
-BuiltInFunction.extend      = BuiltInFunction("COMBINAR")
+BuiltInFunction.print       = BuiltInFunction("print")
+BuiltInFunction.print_ret   = BuiltInFunction("print_ret")
+BuiltInFunction.input       = BuiltInFunction("input")
+BuiltInFunction.input_int   = BuiltInFunction("input_int")
+BuiltInFunction.clear       = BuiltInFunction("clear")
+BuiltInFunction.is_number   = BuiltInFunction("is_number")
+BuiltInFunction.is_string   = BuiltInFunction("is_string")
+BuiltInFunction.is_list     = BuiltInFunction("is_list")
+BuiltInFunction.is_function = BuiltInFunction("is_function")
+BuiltInFunction.append      = BuiltInFunction("append")
+BuiltInFunction.pop         = BuiltInFunction("pop")
+BuiltInFunction.extend      = BuiltInFunction("extend")
 
 #######################################
 # 			CONTEXTO				  #

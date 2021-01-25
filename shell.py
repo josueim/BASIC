@@ -1,7 +1,7 @@
 import basic
 
 while True:
-    text = input('UBASIC > ')
+    text = input('UBASIC $ ')
     result, error = basic.run('<stdin>', text)
 
     if error: print(error.as_string())
