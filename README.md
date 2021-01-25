@@ -1,5 +1,5 @@
 <div align="center"> 
-  <img src="icons/logo_size.jpg" with="200%">
+  <img src="icons/logo_size.jpg" with="200%" height="200%">
 </div>
 
 # ¿Qué es UBASIC?
@@ -45,3 +45,24 @@ UBISC contiene diversos archivos, entre ellos:
 <div align="center"> 
   <img src="icons/2.png">
 </div>
+
+#### Palabras reservadas de UBASIC
+- IMPRIMIR() – imprime en consola la cadena de caracteres
+- LIMPIAR() – función para limpiar la consola de comandos de UBASIC
+- VAR – palabra reservada para declarar una variable (sea entero, flotante o cadena de caracteres)
+- FUN – permite inicializar una función
+- MATH_PI – añade la constante PI para operaciones aritméticas
+- Y – función AND para operaciones lógicas
+- O – función OR para operaciones lógicas
+- NO – función NOT (negación) para operaciones lógicas
+- AÑADIR – permite agregar valores a una lista
+- AGRUPAR – permite fusionar dos o más listas
+- PARA – declaración de la condición FOR
+- SI – declaración de la condición IF
+- HASTA – declaración de la condición IF 
+- MIENTRAS – declaración de condición WHILE
+- DE – contador para condicionales
+- ES_NUM - declaración para un numero entero
+- ES_CAR – declaración para una cadena de caracteres
+
+**Para mayor contenido intelectual sobre el lenguaje, toma el curso en UDEMY *“UBASIC un lenguaje diferente”***
