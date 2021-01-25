@@ -47,6 +47,10 @@ UBISC contiene diversos archivos, entre ellos:
 </div>
 
 #### Palabras reservadas de UBASIC
+
+A continuación, se enlistan algunas de las palabras reservadas que incluye en sus analizadores el lenguaje para su sencilla comprensión.
+
+
 - IMPRIMIR() – imprime en consola la cadena de caracteres
 - LIMPIAR() – función para limpiar la consola de comandos de UBASIC
 - VAR – palabra reservada para declarar una variable (sea entero, flotante o cadena de caracteres)
@@ -68,20 +72,20 @@ UBISC contiene diversos archivos, entre ellos:
 **Para mayor contenido intelectual sobre el lenguaje, toma el curso en UDEMY *“UBASIC un lenguaje diferente”***
 
 ## ¿Quiénes somos?
-</div>
-<div align="center"> 
-  <img src="icons/3.png" with="50%">
-</div>
 
 <div align="justify"> 
 <p>
 Aquellos alumnos que llevan el color de su universidad en el corazón, los que estamos comprometidos a ayudar a nuestra comunidad para un mejor futuro en conjunto.
+
 Somos aquellos que queremos dejar huella y ser la base para un mejor futuro, los que no se rajan ante las adversidades y están dispuestos a dejar el alma por el honor de institución.
 Somos:
 
 -<a href="https://www.facebook.com/josue.islasmorales">Josue Islas</a>
+
 -<a href="https://www.facebook.com/Develop.DaveM/">David Mecalco</a>
 
 **Hecho con amor en UPIICSA 💚**
+
+** VERSIÓN ALPHA 1.1**
 </p>
 </div>
