@@ -120,7 +120,7 @@ TT_INT				= 'ENTERO'
 TT_FLOAT    	    = 'FLOTANTE'
 TT_STRING			= 'STRING'
 TT_IDENTIFIER	    = 'IDENTIFICADOR'
-TT_KEYWORD		    = 'IDENTIFICADOR'
+TT_KEYWORD		    = 'PALABRACLAVE'
 TT_PLUS     		= 'MAS'
 TT_MINUS    	    = 'MENOS'
 TT_MUL      	    = 'MUL'
@@ -155,7 +155,7 @@ KEYWORDS = [
   'HASTA', #ciclo while
   'DE', #step pasos para los ciclos
   'MIENTRAS', #ciclo while
-  'FUN', #Palabra reservada para Funcion 
+  'FUN' #Palabra reservada para Funcion 
 
 ]
 
@@ -640,7 +640,7 @@ class Parser:
     if res.error:
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        "ESPERANDOR entero, flotante, identificador, '+', '-', '(', '[', 'SI', 'PARA', 'MIENTRAS', 'FUN' or 'NO'"
+        "ESPERANDO entero, flotante, identificador, '+', '-', '(', '[', 'SI', 'PARA', 'MIENTRAS', 'FUN' or 'NO'"
       ))
 
     return res.success(node)
@@ -920,7 +920,7 @@ class Parser:
     start_value = res.register(self.expr())
     if res.error: return res
 
-    if not self.current_tok.matches(TT_KEYWORD, 'A'):
+    if not self.current_tok.matches(TT_KEYWORD, 'HASTA'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
         f"ESPERANDO 'A'"
